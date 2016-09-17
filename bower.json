@@ -1,0 +1,19 @@
+{
+    "name": "tweetlikexyz",
+    "homepage": "http://tweetlike.xyz",
+    "authors": [
+        "Kendrick Tan kendricktan0814@gmail.com"
+    ],
+    "description": "Wanna tweet like <insert name here>? Now you can!",
+    "main": "",
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components"
+    ],
+    "dependencies": {
+        "bootstrap": "^3.3.7",
+        "react": "^15.3.1"
+    }
+}
