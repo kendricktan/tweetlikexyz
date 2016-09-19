@@ -1,50 +1,58 @@
-var DynamicSearch = React.createClass({
+var React = require('react');
+var ReactDOM = require('react-dom');
+var MultiSelect = require('react-bootstrap-multiselect');
 
-  // sets initial state
-  getInitialState: function(){
-    return { searchString: '' };
-  },
-
-  // sets state, triggers render method
-  handleChange: function(event){
-    // grab value form input box
-    this.setState({searchString:event.target.value});
-  },
-
-  handleClick: function(value){
-    this.setState({searchString:value})
-  },
-
+// Our column things
+var TweetPage = React.createClass({
   render: function() {
-
-    var peoples = this.props.items;
-    var searchString = this.state.searchString.trim().toLowerCase();
-
-    // filter peoples list by value from input box
-    if(searchString.length > 0){
-      peoples = peoples.filter(function(people){
-        return people.thandle.toLowerCase().match( searchString );
-      });
-    }
-
     return (
-      <div>
-        <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="@twitter handle"/>
-        <ul>
-          { peoples.map(function(people){ return <li><a href="#" onClick={() => this.handleClick(people.thandle) }>{people.thandle}</a></li> }.bind(this)) }
-        </ul>
-      </div>
-    )
-  }
+      <div className="row">
+        <div className="col-md-6 border-right">
+          <h3>tweet like:</h3>
+          <DynamicSearch /> <br/>
+          <h3>phrase to mimic:</h3>
+          <DataFeeder /><br/>
+          <button type="button" className="btn btn-default">xyz-fy</button>
+        </div>
 
+        <div className="col-md-6">
+          <span className="fancyMcFancy"><GetNewExpression /></span>
+        </div>
+      </div>
+    );
+  }
+})
+
+// Get phrase
+var GetNewExpression = React.createClass({
+  render: function(){
+    return (<p>"one upon a time the quick brown fox jumped over a lazy dog and ate himself up, one upon a time the quick brown fox jumped over a lazy dog and ate himself up"</p>);
+  }
+})
+
+// Out input text box
+var DataFeeder = React.createClass({
+  render: function () {
+    return (
+      <textarea className="form-control" rows="15" id="data_feeder" maxlength="140"/>
+    );
+  }
+})
+
+var DynamicSearch = React.createClass({
+    render: function(){
+        var self = this, 
+            options = ["shakespeare" ,"@BarackObama", "@realDonaldTrump"].map(function(name){
+                return {label: name, value: name}
+            });
+        return <MultiSelect 
+            data = {options} 
+            placeholder = "Select names"
+        />
+    }
 });
 
-// list of peoples, defined with JavaScript object literals
-var peoples = [
-  {"thandle": "@realDonaldTrump"}, {"thandle": "@BarackObama"}
-];
-
 ReactDOM.render(
-  <DynamicSearch items={ peoples } />,
-  document.getElementById('twitter_handler_search')
+  <TweetPage />,
+  document.getElementById("content")
 );

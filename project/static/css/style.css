@@ -1,22 +1,17 @@
-/* custom styles */
-
-.container {
-  text-align: center;
-  padding-top: 50px;
-  max-width: 300px;
+body{
+    margin-top: 50px;
+    font-family: 'Droid Sans', sans-serif;
 }
 
-
-input {
-  text-align: center;
-  padding: 13px 12px;
-  font-size: 16px;
-  outline: none;
-  margin-bottom: 20px;
+button, .btn-group{
+    width: 100%;
 }
 
+.border-right{
+    border-right: 1px solid black;
+}
 
-ul {
-  margin-left: 20px;
-  text-align: left;
+.fancyMcFancy{
+    font-family: 'Oleo Script', Arial, Helvetica, sans-serif;
+    font-size: 50px;
 }
