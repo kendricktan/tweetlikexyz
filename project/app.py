@@ -1,5 +1,4 @@
-from flask import Flask, render_template
-from flask import jsonify
+from flask import Flask, render_template, jsonify, request
 
 app = Flask(__name__)
 
@@ -13,9 +12,16 @@ def random_text():
     return jsonify(text="Once upon a time, the quick brown fox jumped over the lazy dog")
 
 # xyzfies your phrases
-@app.route('/quote', methods=['POST'])
+@app.route('/xyzfy', methods=['POST'])
 def xyzfy_phrase():
-    return jsonify(text="hello")
+    try:
+        person = request.form.get('person')
+        phrase = request.form.get('phrase')
+        return jsonify(status="success")
+
+    except ValueError:
+        pass
+    return jsonify(status="failed")
 
 if __name__ == '__main__':
     app.run(debug=True)
