@@ -1,18 +1,23 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var MultiSelect = require('react-bootstrap-multiselect');
+var request = require('request');
 
 // Our column things
 var TweetPage = React.createClass({
+  getQuote: function(){
+    console.log('yay');
+  },
+
   render: function() {
     return (
       <div className="row">
         <div className="col-md-6 border-right">
           <h3>tweet like:</h3>
-          <DynamicSearch /> <br/>
+          <DynamicSearch ref="dynamicsearch" /> <br/>
           <h3>phrase to mimic:</h3>
-          <DataFeeder /><br/>
-          <button type="button" className="btn btn-default">xyz-fy</button>
+          <DataFeeder red="datafeeder" /><br/>
+          <button type="button" onClick={(event) => this.getQuote()} className="btn btn-default">xyz-fy</button>
         </div>
 
         <div className="col-md-6">
@@ -25,8 +30,25 @@ var TweetPage = React.createClass({
 
 // Get phrase
 var GetNewExpression = React.createClass({
+  getInitialState: function(){
+    return {quote: ""};
+  },
+
+  componentDidMount: function() {
+    request({url: 'http://127.0.0.1:5000/random'}, function(error, response, body){
+      result = JSON.parse(body);
+      this.setState({
+        'quote': result['text']
+      });
+    }.bind(this));
+  },
+
+  componentWillUnmount: function() {
+    this.serverRequest.abort();
+  },
+
   render: function(){
-    return (<p>"one upon a time the quick brown fox jumped over a lazy dog and ate himself up, one upon a time the quick brown fox jumped over a lazy dog and ate himself up"</p>);
+    return (<p>"{this.state.quote}"</p>)
   }
 })
 
@@ -34,7 +56,7 @@ var GetNewExpression = React.createClass({
 var DataFeeder = React.createClass({
   render: function () {
     return (
-      <textarea className="form-control" rows="15" id="data_feeder" maxlength="140"/>
+      <textarea className="form-control" rows="15" id="data_feeder" maxLength="140"/>
     );
   }
 })

@@ -1,5 +1,5 @@
 body{
-    margin-top: 50px;
+    margin-top: 20px;
     font-family: 'Droid Sans', sans-serif;
 }
 
@@ -12,6 +12,8 @@ button, .btn-group{
 }
 
 .fancyMcFancy{
+    text-align: center;
+    vertical-align: middle;
     font-family: 'Oleo Script', Arial, Helvetica, sans-serif;
     font-size: 50px;
 }
