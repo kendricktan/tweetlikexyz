@@ -18,7 +18,6 @@ def xyzfy_phrase():
         person = request.form.get('person')
         phrase = request.form.get('phrase')
         return jsonify(status="success")
-
     except ValueError:
         pass
     return jsonify(status="failed")
