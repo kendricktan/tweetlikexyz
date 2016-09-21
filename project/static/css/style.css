@@ -3,7 +3,7 @@ body{
     font-family: 'Droid Sans', sans-serif;
 }
 
-button, .btn-group{
+.btn, .btn-group{
     width: 100%;
 }
 

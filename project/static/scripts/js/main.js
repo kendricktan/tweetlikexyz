@@ -99184,6 +99184,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var MultiSelect = require('react-bootstrap-multiselect');
 var request = require('request');
+var SERVER_URL = 'http://127.0.0.1:5000/';
 
 var PageLayout = React.createClass({displayName: "PageLayout",
   render: function(){
@@ -99218,7 +99219,7 @@ var TweetForm = React.createClass({displayName: "TweetForm",
       'phrase': phrase
     };
 
-    request.post({url: 'http://127.0.0.1:5000/xyzfy', form: data}, function (error, response, body){
+    request.post({url: SERVER_URL+'xyzfy', form: data}, function (error, response, body){
       result = JSON.parse(body);
       console.log(result);
     });
@@ -99258,7 +99259,7 @@ var NewPhrase = React.createClass({displayName: "NewPhrase",
   },
 
   componentDidMount: function() {
-    request({url: 'http://127.0.0.1:5000/random'}, function(error, response, body){
+    request({url: SERVER_URL+'random'}, function(error, response, body){
       result = JSON.parse(body);
       this.setState({
         'quote': result['text']
