@@ -11,3 +11,11 @@ bower_components/
 .module-cache
 
 .vscode/
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+model_*
+checkpoint
+*_input.txt
