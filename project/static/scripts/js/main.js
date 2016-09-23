@@ -99184,7 +99184,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var MultiSelect = require('react-bootstrap-multiselect');
 var request = require('request');
-var SERVER_URL = 'http://52.65.212.22/';
+var SERVER_URL = 'http://tweetlike.xyz/';
 
 var PageLayout = React.createClass({displayName: "PageLayout",
   render: function(){
@@ -99239,7 +99239,7 @@ var TweetForm = React.createClass({displayName: "TweetForm",
 
   // People selector
   renderMultiselect: function(id){
-    var options = ["shakespeare", "@BarackObama", "@realDonaldTrump"].map(function(name){
+    var options = ["shakespeare", "eminem", "donald trump"].map(function(name){
       return {label: name, value: name}
     });
 
