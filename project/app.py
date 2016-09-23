@@ -15,7 +15,7 @@ def index():
 # Gets a random quote
 @app.route('/random')
 def random_text():
-    return jsonify(text="Once upon a time, the quick brown fox jumped over the lazy dog. And it tested its webhooks")
+    return jsonify(text="Once upon a time, the quick brown fox jumped over the lazy dog. And it tested its webhooks. Test 42")
 
 # xyzfies your phrases
 @app.route('/xyzfy', methods=['POST'])
@@ -31,7 +31,7 @@ def xyzfy_phrase():
 # Github webhook
 @webhook.hook()
 def on_github_push(data):
-    os.system('../gitpull.sh')
+    os.system('../update.sh')
 
 if __name__ == '__main__':
     app.run(debug=True)
