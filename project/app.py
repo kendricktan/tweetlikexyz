@@ -1,8 +1,12 @@
+import os
+
+from github_webhook import Webhook
 from flask import Flask, render_template, jsonify, request
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 CORS(app)
+webhook = Webhook(app, endpoint='/github-hook')
 
 @app.route('/')
 def index():
@@ -23,6 +27,11 @@ def xyzfy_phrase():
     except ValueError:
         pass
     return jsonify(status="failed")
+
+# Github webhook
+@webhook.hook()
+def on_github_push(data):
+    os.system('../gitpull.sh')
 
 if __name__ == '__main__':
     app.run(debug=True)
