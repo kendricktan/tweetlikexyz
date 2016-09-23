@@ -15,7 +15,7 @@ def index():
 # Gets a random quote
 @app.route('/random')
 def random_text():
-    return jsonify(text="Once upon a time, the quick brown fox jumped over the lazy dog")
+    return jsonify(text="Once upon a time, the quick brown fox jumped over the lazy dog. And it tested its webhooks")
 
 # xyzfies your phrases
 @app.route('/xyzfy', methods=['POST'])
