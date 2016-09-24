@@ -9,7 +9,7 @@ shakespeare_path = os.path.join('models', 'shakespeare_input.txt')
 if not os.path.isfile(shakespeare_path):
     urllib.request.urlretrieve("https://raw.githubusercontent.com/tflearn/tflearn.github.io/master/resources/shakespeare_input.txt", shakespeare_path)
 
-def get_rnn(model_name, char_idx=None, maxlen=25):
+def get_rnn(model_name, char_idx=None, maxlen=140):
     if char_idx is None:
         if 'shakespeare' in model_name:
             _, _, char_idx = textfile_to_semi_redundant_sequences(shakespeare_path, maxlen, 3, True)
