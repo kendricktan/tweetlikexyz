@@ -3,7 +3,7 @@ var ReactDOM = require('react-dom');
 var MultiSelect = require('react-bootstrap-multiselect');
 var request = require('request');
 var SERVER_URL = 'http://tweetlike.xyz/';
-var SERVER_URL = 'http://127.0.0.1:5000/';
+//var SERVER_URL = 'http://127.0.0.1:5000/';
 
 var PageLayout = React.createClass({
   updatePhrase: function(dict){
