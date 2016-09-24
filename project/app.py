@@ -1,12 +1,20 @@
 import os
 
+#from models.lstm import get_rnn
 from github_webhook import Webhook
 from flask import Flask, render_template, jsonify, request
 from flask_cors import CORS, cross_origin
 
+# Init our flask things
 app = Flask(__name__)
 CORS(app)
 webhook = Webhook(app, endpoint='/github-hook')
+
+# Our neural network for ...
+print('[-] Loading shakespeare models...')
+#model_shakespeare = get_rnn('model_shakespeare')
+#model_shakespeare.load('models/model_shakespeare-192942')
+print('[!] Finished loading models')
 
 @app.route('/')
 def index():
@@ -23,7 +31,10 @@ def xyzfy_phrase():
     try:
         person = request.form.get('person')
         phrase = request.form.get('phrase')
-        return jsonify(status="success")
+
+        if 'shakespeare' in person:
+            return jsonify(xyzfy_phrase='to be or not to be, that is the question')
+
     except ValueError:
         pass
     return jsonify(status="failed")

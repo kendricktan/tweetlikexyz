@@ -1,6 +1,6 @@
 from __future__ import absolute_import, division, print_function
 
-import os
+import os, sys
 from six.moves import urllib
 
 import tflearn
@@ -11,7 +11,7 @@ path = "shakespeare_input.txt"
 if not os.path.isfile(path):
     urllib.request.urlretrieve("https://raw.githubusercontent.com/tflearn/tflearn.github.io/master/resources/shakespeare_input.txt", path)
 
-maxlen = 25
+maxlen = 140
 
 X, Y, char_idx = \
     textfile_to_semi_redundant_sequences(path, maxlen, 3, True)
@@ -31,6 +31,9 @@ m = tflearn.SequenceGenerator(g, dictionary=char_idx,
                               seq_maxlen=maxlen,
                               clip_gradients=5.0,
                               checkpoint_path='model_shakespeare')
+
+if len(sys.argv) > 1:
+    m.load(sys.argv[1])
 
 for i in range(47):
     seed = random_sequence_from_textfile(path, maxlen)

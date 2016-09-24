@@ -3,17 +3,42 @@ var ReactDOM = require('react-dom');
 var MultiSelect = require('react-bootstrap-multiselect');
 var request = require('request');
 var SERVER_URL = 'http://tweetlike.xyz/';
+var SERVER_URL = 'http://127.0.0.1:5000/';
 
 var PageLayout = React.createClass({
+  updatePhrase: function(dict){
+    value = dict['xyzfy_phrase']
+    this.setState({
+      'quote': value
+    });
+  },
+
+  getInitialState: function(){
+    return {quote: ""};
+  },
+
+  componentDidMount: function() {
+    request({url: SERVER_URL+'random'}, function(error, response, body){
+      result = JSON.parse(body);
+      this.setState({
+        'quote': result['text']
+      });
+    }.bind(this));
+  },
+
+  componentWillUnmount: function() {
+    this.serverRequest.abort();
+  },
+
   render: function(){
     return (
       <div className="row">
         <div className="col-md-6 border-right">
-          <TweetForm />
+          <TweetForm updatePhrase={this.updatePhrase}/>
         </div>
 
         <div className="col-md-6">
-          <span className="fancyMcFancy"><NewPhrase /></span>
+          <span className="fancyMcFancy"><NewPhrase quote={this.state.quote}/></span>
         </div>
       </div>
     )
@@ -39,8 +64,8 @@ var TweetForm = React.createClass({
 
     request.post({url: SERVER_URL+'xyzfy', form: data}, function (error, response, body){
       result = JSON.parse(body);
-      console.log(result);
-    });
+      this.props.updatePhrase(result);
+    }.bind(this));
   },
 
   render: function() {
@@ -72,25 +97,8 @@ var TweetForm = React.createClass({
 
 // Xyz-fied Phrase output
 var NewPhrase = React.createClass({
-  getInitialState: function(){
-    return {quote: ""};
-  },
-
-  componentDidMount: function() {
-    request({url: SERVER_URL+'random'}, function(error, response, body){
-      result = JSON.parse(body);
-      this.setState({
-        'quote': result['text']
-      });
-    }.bind(this));
-  },
-
-  componentWillUnmount: function() {
-    this.serverRequest.abort();
-  },
-
   render: function(){
-    return (<p>"{this.state.quote}"</p>)
+    return (<p>"{this.props.quote}"</p>)
   }
 })
 
