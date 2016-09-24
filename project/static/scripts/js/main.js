@@ -99189,7 +99189,7 @@ var SERVER_URL = 'http://tweetlike.xyz/';
 
 var PageLayout = React.createClass({displayName: "PageLayout",
   updatePhrase: function(dict){
-    value = dict['xyzfy_phrase']
+    value = dict['xyzfy_phrase'];
     this.setState({
       'quote': value
     });
